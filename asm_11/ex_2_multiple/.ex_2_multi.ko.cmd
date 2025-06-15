@@ -1,0 +1,1 @@
+savedcmd_/home/hoanganhpham/asm_11/ex_2_multiple/ex_2_multi.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/hoanganhpham/asm_11/ex_2_multiple/ex_2_multi.ko /home/hoanganhpham/asm_11/ex_2_multiple/ex_2_multi.o /home/hoanganhpham/asm_11/ex_2_multiple/ex_2_multi.mod.o

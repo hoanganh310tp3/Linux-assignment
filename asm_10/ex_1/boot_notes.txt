@@ -1,0 +1,3 @@
+[systemd] Mounted sys-kernel-debug.mount – Kernel Debug File System  
+/* systemd mounted the kernel debug filesystem, helping for kernel-level debugging and diagnostics */
+

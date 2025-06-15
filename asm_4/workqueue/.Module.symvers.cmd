@@ -1,0 +1,1 @@
+savedcmd_/home/hoanganhpham/asm_4/workqueue/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/hoanganhpham/asm_4/workqueue/Module.symvers -T /home/hoanganhpham/asm_4/workqueue/modules.order -i Module.symvers -e 

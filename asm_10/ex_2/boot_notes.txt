@@ -1,0 +1,1 @@
+The filesystem table (fstab) in a Linux system is a configuration file that simplifies the process of mounting and unmounting filesystems by defining a set of rules that determine how each filesystem is handled whenever it is introduced to the system.

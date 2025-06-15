@@ -1,0 +1,2 @@
+Kernel boot parameter: ro
+==> Purpose: The 'ro' parameter instructs the Linux kernel to mount the root filesystem as read-only during the early boot process, allowing the system to perform filesystem checks (e.g., fsck) before any write operations occur. 
