@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/epoll.h>
-#include <sys/socket.h>
-#include <fcntl.h>
-#include <string.h>
+#include <stdio.h> // used for printf(), perror(), fflush()
+#include <stdlib.h> // used for exit()
+#include <unistd.h> // used for read(), write(), close(), pipe(), socketpair()
+#include <sys/epoll.h> // used for epoll_create1(), epoll_ctl(), epoll_wait()
+#include <sys/socket.h> // used for socketpair()
+#include <fcntl.h> // used for fcntl()
+
 
 #define MAX_EVENTS 2
 #define BUF_SIZE 1024
@@ -57,6 +57,7 @@ int main() {
         if (len > 0) {
             buf[len] = '\0';
             if (fd == 0) {
+                printf("User typed: %s\n", buf);
                 write(sv[0], buf, len);
             } else if (fd == sv[1]) {
                 printf("Message from Socketpair: %s\n", buf);

@@ -1,1 +1,0 @@
-savedcmd_/home/hoanganhpham/asm_4/tasklet/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/hoanganhpham/asm_4/tasklet/Module.symvers -T /home/hoanganhpham/asm_4/tasklet/modules.order -i Module.symvers -e 

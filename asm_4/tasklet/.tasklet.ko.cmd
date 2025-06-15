@@ -1,1 +1,0 @@
-savedcmd_/home/hoanganhpham/asm_4/tasklet/tasklet.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/hoanganhpham/asm_4/tasklet/tasklet.ko /home/hoanganhpham/asm_4/tasklet/tasklet.o /home/hoanganhpham/asm_4/tasklet/tasklet.mod.o

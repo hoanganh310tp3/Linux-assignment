@@ -1,8 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <sys/select.h>
+#include <stdio.h> // used for printf(), fgets(), perror()
+#include <unistd.h> // used for STDIN_FILEND
+#include <sys/time.h> // used for struct timeval in order to setting waiting time of select()
+#include <sys/select.h> // used for select(), FD_ZERO(), FD_SET()
 
 int main() {
     fd_set readfds;

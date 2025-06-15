@@ -5,6 +5,7 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/workqueue.h>
+#include <linux/kthread.h>
 
 static DECLARE_WAIT_QUEUE_HEAD(my_wq);
 static int sleep_flag = 0;
@@ -20,12 +21,23 @@ static void work_handler(struct work_struct *work)
 
     printk(KERN_INFO "Work queue handler: data = %d\n", my_data->the_data);
 
-    msleep(2000);  // Giả lập công việc tốn thời gian
+    msleep(2000);  
 
     sleep_flag = 1;
     wake_up_interruptible(&my_wq);
 
     kfree(my_data);
+}
+
+static int thread_fn(void *data)
+{
+    pr_info("waiting for work to complete \n");
+ 
+    wait_event_interruptible(my_wq, sleep_flag != 0);
+
+    pr_info("work done! \n");
+
+    return 0;
 }
 
 static int __init my_init(void)
@@ -43,11 +55,8 @@ static int __init my_init(void)
     INIT_WORK(&my_data->my_work, work_handler);
     schedule_work(&my_data->my_work);
 
-    printk(KERN_INFO "Work scheduled, waiting for it to complete...\n");
+    kthread_run(thread_fn, NULL, "wait thread");
 
-    wait_event_interruptible(my_wq, sleep_flag != 0);
-
-    printk(KERN_INFO "Work completed, init done.\n");
     return 0;
 }
 

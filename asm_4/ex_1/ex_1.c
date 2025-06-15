@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <unistd.h>
+#include <stdio.h> // used for printf()
+#include <stdlib.h> // used for exit()
+#include <signal.h> // used for SIGUSR1, SIGUSR2, siganl()
+#include <unistd.h> // used for getpid(), pause()
 
 void signal_handler(int signum) {
     if (signum == SIGUSR1) {
