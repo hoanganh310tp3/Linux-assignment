@@ -1,0 +1,1 @@
+savedcmd_/home/hoanganhpham/Linux_assignment/asm_11/ex_2_multi2/ex_2_multi2.mod := printf '%s\n'   ex_2_multi2.o | awk '!x[$$0]++ { print("/home/hoanganhpham/Linux_assignment/asm_11/ex_2_multi2/"$$0) }' > /home/hoanganhpham/Linux_assignment/asm_11/ex_2_multi2/ex_2_multi2.mod

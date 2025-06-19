@@ -16,6 +16,40 @@ static dev_t dev_number;
 static struct class *dev_class;
 static struct cdev my_cdev[NUM_DEVICES];
 
+
+
+/* struct my_device {
+    name, buffer, permission
+};
+*/
+
+/*
+struct platform_driver {
+    dev_t
+    cdev
+    class
+} 
+*/
+
+/*
+struct my_device device[NUM_DEVICE] = {
+    (.name = "", .buf, .permission),
+}
+*/
+
+/*
+struct platform_driver {
+    dev_base
+    cdev
+    class
+}
+*/
+
+/*
+struct platform_driver pdev;
+*/
+
+
 struct device_data {
     char buffer[BUFFER_SIZE];
     int size;
@@ -112,7 +146,7 @@ static int __init multi_dev_init(void)
     dev_class->devnode = devnode_fn;
     
     for (i = 0; i < NUM_DEVICES; i++){
-        cdev_init(&my_cdev[i], &fops);
+        cdev_init(&my_cdev[i], &fops); // ko dùng mảng, 1 cdev là lưu dc 5 thiết bị 
         my_cdev[i].owner = THIS_MODULE;
         cdev_add(&my_cdev[i], MKDEV(MAJOR(dev_number), i), 1);
         device_create(dev_class, NULL, MKDEV(MAJOR(dev_number),i), NULL, "multi_dev%d", i);
