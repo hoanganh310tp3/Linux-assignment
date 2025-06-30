@@ -1,73 +1,53 @@
-#include <linux/module.h>
-#include <linux/init.h>
-#include <linux/sched.h>
-#include <linux/wait.h>
-#include <linux/delay.h>
-#include <linux/slab.h>
-#include <linux/workqueue.h>
-#include <linux/kthread.h>
+#include <linux/module.h>    // used for module_init(), module_exit(), MODULE_LICENSE(), MODULE_DESCRIPTION(), MODULE_AUTHOR()
+#include <linux/kernel.h>    // used for printk()
+#include <linux/init.h>      // used for __init, __exit macros
+#include <linux/workqueue.h> // used for work_struct, INIT_WORK(), schedule_work(), flush_work()
+#include <linux/delay.h>     // used for msleep()
 
-static DECLARE_WAIT_QUEUE_HEAD(my_wq);
-static int sleep_flag = 0;
+// Work structure with unique name
+static struct work_struct test_work;
 
-struct work_data {
-    struct work_struct my_work;
-    int the_data;
-};
-
-static void work_handler(struct work_struct *work)
+// Work handler function with unique name
+static void test_work_handler(struct work_struct *work)
 {
-    struct work_data *my_data = container_of(work, struct work_data, my_work);
-
-    printk(KERN_INFO "Work queue handler: data = %d\n", my_data->the_data);
-
-    msleep(2000);  
-
-    sleep_flag = 1;
-    wake_up_interruptible(&my_wq);
-
-    kfree(my_data);
+    printk(KERN_INFO "TEST_WQ: Work executing...\n");
+    
+    // Simulate some work
+    msleep(1000);  // Sleep for 1 second
+    
+    printk(KERN_INFO "TEST_WQ: Work completed!\n");
 }
 
-static int thread_fn(void *data)
+// Module initialization
+static int __init test_wq_init(void)
 {
-    pr_info("waiting for work to complete \n");
- 
-    wait_event_interruptible(my_wq, sleep_flag != 0);
-
-    pr_info("work done! \n");
-
+    printk(KERN_INFO "TEST_WQ: Module loaded\n");
+    
+    // Initialize work
+    INIT_WORK(&test_work, test_work_handler);
+    
+    // Schedule work
+    schedule_work(&test_work);
+    
     return 0;
 }
 
-static int __init my_init(void)
+// Module cleanup
+static void __exit test_wq_exit(void)
 {
-    struct work_data *my_data;
-
-    printk(KERN_INFO "Workqueue module init\n");
-
-    my_data = kmalloc(sizeof(struct work_data), GFP_KERNEL);
-    if (!my_data)
-        return -ENOMEM;
-
-    my_data->the_data = 34;
-
-    INIT_WORK(&my_data->my_work, work_handler);
-    schedule_work(&my_data->my_work);
-
-    kthread_run(thread_fn, NULL, "wait thread");
-
-    return 0;
+    printk(KERN_INFO "TEST_WQ: Module unloading...\n");
+    
+    // Wait for work to complete
+    flush_work(&test_work);
+    
+    printk(KERN_INFO "TEST_WQ: Module unloaded\n");
 }
 
-static void __exit my_exit(void)
-{
-    printk(KERN_INFO "Workqueue module exit\n");
-}
-
-module_init(my_init);
-module_exit(my_exit);
+module_init(test_wq_init);
+module_exit(test_wq_exit);
 
 MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("Test Workqueue");
 MODULE_AUTHOR("AnhPH58");
-MODULE_DESCRIPTION("Corrected shared workqueue example with wait queue");
+
+

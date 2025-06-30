@@ -34,7 +34,7 @@ int main()
     }
 
     snprintf(device_path, sizeof(device_path), "/dev/%s", device_names[dev_num]);
-    fd = open(device_path, O_RDWR);  // Dùng O_RDWR để có thể read + write
+    fd = open(device_path, O_RDWR);  
 
     if(fd < 0) {
         perror("Cannot open device file");
@@ -53,7 +53,7 @@ int main()
             case '1':
                 printf("Enter something to write into driver: ");
                 fgets((char *)write_buf, BUFFER_SIZE, stdin);
-                write_buf[strcspn((char *)write_buf, "\n")] = 0; // remove newline
+                write_buf[strcspn((char *)write_buf, "\n")] = 0; 
 
                 if(write(fd, write_buf, strlen((char *)write_buf) + 1) < 0)
                     perror("Write failed");

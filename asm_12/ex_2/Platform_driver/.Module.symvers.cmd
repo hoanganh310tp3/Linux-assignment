@@ -1,0 +1,1 @@
+savedcmd_/home/hoanganhpham/Linux_assignment/asm_12/ex_2/Platform_driver/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/hoanganhpham/Linux_assignment/asm_12/ex_2/Platform_driver/Module.symvers -T /home/hoanganhpham/Linux_assignment/asm_12/ex_2/Platform_driver/modules.order -i Module.symvers -e 

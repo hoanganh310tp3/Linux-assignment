@@ -1,0 +1,22 @@
+/ {
+    my_device: my-virtual-device@0 {
+        compatible = "you,my-device";
+        reg = <0x0 0x0>;
+        threshold = <42>;                 // int
+        label = "default-label";          // string
+        values = <1 2 3 4>;               // array
+
+        child@1 {
+            compatible = "you,my-child";
+            reg = <0x1 0x0>;
+            speed = <9600>;              
+            sensor-name = "sensor-1";     
+        };
+    };
+};
+
+&my_device {
+    threshold = <99>;
+    label = "overridden-label";
+    values = <5 6 7 8 9>;
+};

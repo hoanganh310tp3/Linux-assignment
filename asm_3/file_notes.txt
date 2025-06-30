@@ -1,0 +1,1 @@
+cp command has the characteristic of creating new file with a seperate inode, not linking it to the initial file.

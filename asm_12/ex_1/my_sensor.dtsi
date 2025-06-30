@@ -1,0 +1,8 @@
+/ {
+    my_sensor: my-sensor {
+        compatible = "you,my-sensor";
+        threshold = <150>;
+        sensor-name = "temperature-sensor";
+        status = "okay";
+    };
+};

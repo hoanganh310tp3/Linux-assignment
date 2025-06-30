@@ -1,1 +1,0 @@
-savedcmd_/home/hoanganhpham/asm_11/ex_2_multiple/ex_2_multi.mod := printf '%s\n'   ex_2_multi.o | awk '!x[$$0]++ { print("/home/hoanganhpham/asm_11/ex_2_multiple/"$$0) }' > /home/hoanganhpham/asm_11/ex_2_multiple/ex_2_multi.mod

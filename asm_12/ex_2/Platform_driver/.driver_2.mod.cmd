@@ -1,0 +1,1 @@
+savedcmd_/home/hoanganhpham/Linux_assignment/asm_12/ex_2/Platform_driver/driver_2.mod := printf '%s\n'   driver_2.o | awk '!x[$$0]++ { print("/home/hoanganhpham/Linux_assignment/asm_12/ex_2/Platform_driver/"$$0) }' > /home/hoanganhpham/Linux_assignment/asm_12/ex_2/Platform_driver/driver_2.mod
